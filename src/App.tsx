@@ -9,7 +9,7 @@ import styles from './App.module.css';
 const App: Component = () => {
   return (
     <div>
-      <MainContainer>Hello World</MainContainer>
+      <MainContainer />
     </div>
   );
 };

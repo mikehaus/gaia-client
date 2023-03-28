@@ -1,9 +1,8 @@
-import { Box } from "@suid/material";
 import { styled } from "@suid/material";
-
+import { Box, Button } from "@suid/material";
 import { COLORS } from '../utils/colors';
 
-const Container = styled("div")({
+const OuterContainer = styled("div")({
   color: COLORS.WHITE,
   backgroundColor: COLORS.BG_MAIN,
   padding: 10,
@@ -11,12 +10,38 @@ const Container = styled("div")({
   height: '100vh',
 })
 
-interface MainContainerProps {
-  children: string;
-}
+const MainFlex = styled("div")({
+  display: "flex",
+  width: "100%",
+})
 
-export default function MainContainer(props: MainContainerProps) {
-  const { children } = props;
+const ConversationBox = styled(Box)({
+  margin: 10,
+  borderRadius: 8,
+})
 
-  return <Container>{children}</Container>
+const MessageFlex = styled(Box)({
+  display: 'flex',
+  width: "100%",
+  height: 52,
+})
+
+const MessageBox = styled("input")({
+  marginRight: 10,
+  width: "calc(100% - 74px)"
+})
+
+export default function MainContainer() {
+
+  return (
+    <OuterContainer>
+      <MainFlex>
+        <ConversationBox />
+        <MessageFlex>
+          <MessageBox />
+          <Button variant="contained">Ask</Button>
+        </MessageFlex>
+      </MainFlex>
+    </OuterContainer>
+  );
 }
