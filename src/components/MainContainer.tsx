@@ -9,7 +9,6 @@ const OuterContainer = styled("div")({
   width: '100%',
   height: '100vh',
 })
-
 const MainFlex = styled("div")({
   display: "flex",
   width: "100%",
@@ -34,14 +33,6 @@ const MessageBox = styled("input")({
 export default function MainContainer() {
 
   return (
-    <OuterContainer>
-      <MainFlex>
-        <ConversationBox />
-        <MessageFlex>
-          <MessageBox />
-          <Button variant="contained">Ask</Button>
-        </MessageFlex>
-      </MainFlex>
-    </OuterContainer>
+    <div></div>
   );
 }
