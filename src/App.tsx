@@ -1,16 +1,21 @@
 import type { Component } from 'solid-js';
-import { Button } from '@suid/material';
+import { Button, createTheme, ThemeProvider, } from '@suid/material';
 
 import MainContainer from './components/MainContainer';
 
-import logo from './logo.svg';
-import styles from './App.module.css';
+const darkMode = createTheme({
+  palette: {
+    mode: "dark"
+  }
+});
 
 const App: Component = () => {
   return (
-    <div>
-      <MainContainer />
-    </div>
+    <ThemeProvider theme={darkMode} >
+      <div>
+        <MainContainer />
+      </div>
+    </ThemeProvider >
   );
 };
 
