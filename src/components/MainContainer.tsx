@@ -1,6 +1,9 @@
 import { createSignal } from "solid-js";
 import { styled } from "@suid/material";
 import { Box, Button, TextField } from "@suid/material";
+
+import axios from 'axios';
+
 import { COLORS } from '../utils/colors';
 
 const OuterContainer = styled("div")({
@@ -42,13 +45,33 @@ const QuestionTextField = styled(TextField)({
 export default function MainContainer() {
   const [question, setQuestion] = createSignal("");
 
+  const URL = `/openai/completions`;
+
+  const config = {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-requested-With, Content-Type, Authorization',
+    },
+  };
+
+  const instance = axios.create({ baseURL: 'http://localhost:8080', timeout: 4000, headers: config.headers });
+
+  const makeTestCall = e => {
+    e.preventDefault();
+
+    instance.post(URL)
+      .then((res) => console.log(res))
+      .catch(err => console.error(err));
+  }
+
   return (
     <OuterContainer>
       <ConversationBox>
       </ConversationBox>
       <MessageFlex component="form" novalidate autocomplete="off">
         <QuestionTextField id="question-textfield" placeholder="Type your question here!" variant="filled" />
-        <Button sx={{ "marginRight": "14px" }} variant="contained">Submit</Button>
+        <Button sx={{ "marginRight": "14px" }} variant="contained" onClick={(e) => makeTestCall(e)}>Submit</Button>
       </MessageFlex>
     </OuterContainer>
   );
