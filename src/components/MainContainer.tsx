@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { ChangeEvent } from "@suid/types";
 import { styled } from "@suid/material";
 import { Box, Button, TextField } from "@suid/material";
 
@@ -57,7 +58,12 @@ export default function MainContainer() {
 
   const instance = axios.create({ baseURL: 'http://localhost:8080', timeout: 4000, headers: config.headers });
 
-  const makeTestCall = e => {
+  const handleQuestionChange = (event: Event): void => {
+    const newValue = (event.target as HTMLInputElement).value;
+    setQuestion(newValue);
+  }
+
+  const makeTestCall = (e: Event) => {
     e.preventDefault();
 
     instance.post(URL)
@@ -70,7 +76,11 @@ export default function MainContainer() {
       <ConversationBox>
       </ConversationBox>
       <MessageFlex component="form" novalidate autocomplete="off">
-        <QuestionTextField id="question-textfield" placeholder="Type your question here!" variant="filled" />
+        <QuestionTextField
+          id="question-textfield"
+          placeholder="Type your question here!"
+          variant="filled"
+          onChange={handleQuestionChange} />
         <Button sx={{ "marginRight": "14px" }} variant="contained" onClick={(e) => makeTestCall(e)}>Submit</Button>
       </MessageFlex>
     </OuterContainer>
