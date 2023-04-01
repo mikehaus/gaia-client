@@ -50,6 +50,7 @@ export default function MainContainer() {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'X-requested-With, Content-Type, Authorization',
+      'Content-Type': 'application/json',
     },
   };
 
@@ -63,9 +64,11 @@ export default function MainContainer() {
   const makeTestCall = (e: Event) => {
     e.preventDefault();
 
-    instance.post(URL)
+    instance.post(URL, question())
       .then((res) => console.log(res))
       .catch(err => console.error(err));
+
+    setQuestion('');
   }
 
   return (
@@ -77,6 +80,7 @@ export default function MainContainer() {
           id="question-textfield"
           placeholder="Type your question here!"
           variant="filled"
+          value={question()}
           onChange={handleQuestionChange} />
         <SubmitButton sx={{ "marginRight": "14px" }} variant="contained" onClick={(e) => makeTestCall(e)}>Submit</SubmitButton>
       </SearchContainer>
