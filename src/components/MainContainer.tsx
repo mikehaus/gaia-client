@@ -7,40 +7,37 @@ import axios from 'axios';
 
 import { COLORS } from '../utils/colors';
 
-const OuterContainer = styled("div")({
+const SpaContainer = styled("div")({
   backgroundColor: COLORS.BG_MAIN,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
+  position: "fixed",
+  top: 0,
+  left: 0,
   width: '100%',
-  height: '100vh',
-})
-
-const MainFlex = styled("div")({
-  display: "flex",
-  flexDirection: "column",
-  width: "90%",
-  height: "95%"
+  height: '100%',
+  overflow: 'hidden',
 })
 
 const ConversationBox = styled(Box)({
-  marginBottom: 8,
-  height: "85%",
-  width: "90%",
+  height: "calc(100% - 100px)",
   borderRadius: 8,
+  backgroundColor: COLORS.BG_CONVERSATION_BOX,
+  margin: '16px 32px'
 })
 
-const MessageFlex = styled(Box)({
-  display: 'flex',
-  width: "90%",
-  height: 48,
-  justifyContent: 'space-between',
+const SearchContainer = styled("div")({
+  margin: '16px 32px',
+  display: "flex",
+  alignItems: 'center',
 })
 
-const QuestionTextField = styled(TextField)({
+const SearchInput = styled(TextField)({
+  flex: 1,
   height: "48px",
-  width: '90%',
+  marginRight: '8px'
+})
+
+const SubmitButton = styled(Button)({
+  height: '48px',
 })
 
 export default function MainContainer() {
@@ -72,17 +69,17 @@ export default function MainContainer() {
   }
 
   return (
-    <OuterContainer>
+    <SpaContainer>
       <ConversationBox>
       </ConversationBox>
-      <MessageFlex component="form" novalidate autocomplete="off">
-        <QuestionTextField
+      <SearchContainer>
+        <SearchInput
           id="question-textfield"
           placeholder="Type your question here!"
           variant="filled"
           onChange={handleQuestionChange} />
-        <Button sx={{ "marginRight": "14px" }} variant="contained" onClick={(e) => makeTestCall(e)}>Submit</Button>
-      </MessageFlex>
-    </OuterContainer>
+        <SubmitButton sx={{ "marginRight": "14px" }} variant="contained" onClick={(e) => makeTestCall(e)}>Submit</SubmitButton>
+      </SearchContainer>
+    </SpaContainer>
   );
 }
